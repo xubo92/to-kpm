@@ -1,0 +1,62 @@
+seed: 2025
+domain_name: "cheetah"
+task_name: "run"
+work_dir: "/kpmlilat/tests/test_embed_lqr_rl/tmp_paper/cheetah"
+save_video: True
+save_tb: True
+save_model: True
+save_buffer: False
+log_interval: 100
+device: "cuda:0"
+env:
+  pre_transform_image_size: 100
+  action_repeat: 4
+  frame_stack: 3
+  image_size: 84
+  replay_buffer_capacity: 100000
+  encoder_type: "fc"
+agent: 
+  name: "curl_sac_koopmanlqr"  # or "curl_sac_koopmanlqr"
+  hidden_dim: 1024
+  discount: 0.99
+  init_temperature: 0.1
+  alpha_lr: 0.0001
+  alpha_beta: 0.5
+  actor_lr: 0.0002
+  actor_beta: 0.9
+  actor_log_std_min: -10
+  actor_log_std_max: 2
+  actor_update_freq: 2
+  critic_lr: 0.0002
+  critic_beta: 0.9
+  critic_tau: 0.01
+  critic_target_update_freq: 2
+  encoder_feature_dim: 50
+  encoder_lr: 0.0002
+  encoder_tau: 0.05
+  num_layers: 4
+  num_filters: 32
+  curl_latent_dim: 128
+  detach_encoder: False
+train:
+  init_steps: 1000
+  num_train_steps: 4000000
+  batch_size: 512
+eval:
+  eval_freq: 50000
+  num_eval_episodes: 10
+koopman:
+  koopman_size:                 0
+  koopman_horizon:              5
+  least_square_fit_coeff:       0
+  koopman_fit_coeff:            0.1
+  koopman_fit_coeff_errbound:   0
+  koopman_fit_optim_lr:         0
+  koopman_fit_n_itrs:           0
+  koopman_fit_mat_reg_coeff:    0
+  koopman_recons_coeff:         0 
+  koopman_nonnn_lr:             0
+  koopman_goal_image_path:      None
+  koopman_update_freq:          1
+
+
